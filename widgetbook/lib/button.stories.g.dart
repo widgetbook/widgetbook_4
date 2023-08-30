@@ -2,6 +2,7 @@ part of 'button.stories.dart';
 
 class ButtonStory extends WidgetbookStory<Button, ButtonKnobs> {
   ButtonStory({
+    required super.name,
     required super.setup,
     required super.knobs,
     required super.builder,

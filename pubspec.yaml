@@ -15,5 +15,16 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Using this fork as alchemist is not currently
+  # compatible with Flutter 3.13
+  alchemist:
+    git:
+      url: https://github.com/ABausG/alchemist/
+      ref: flutter-3-13
+
+  # Cyclic Dependency
+  widgetbook_fruits_app:
+    path: widgetbook
+
 flutter:
   uses-material-design: true

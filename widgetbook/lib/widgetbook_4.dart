@@ -43,18 +43,24 @@ abstract class WidgetbookComponent<T> {
 
 abstract class WidgetbookStory<T, TKnobs extends WidgetbookKnobs<T>> {
   WidgetbookStory({
+    required this.name,
     required this.setup,
     required this.knobs,
     required this.builder,
   });
 
+  final String name;
   final VoidCallback setup;
   final TKnobs knobs;
   final Widget Function(BuildContext context, TKnobs knobs) builder;
 
   ComponentMetadata get component;
 
-  Widget build(BuildContext context, List<WidgetbookAddon> addons) {
+  Widget build(
+    BuildContext context,
+    List<WidgetbookAddon> addons,
+    TKnobs knobs,
+  ) {
     return Column(
       children: [
         Text('Building with ${addons.length} addons}'),
@@ -65,3 +71,19 @@ abstract class WidgetbookStory<T, TKnobs extends WidgetbookKnobs<T>> {
 }
 
 abstract class WidgetbookKnobs<T> {}
+
+abstract class WidgetbookScenario<T> {
+  const WidgetbookScenario({
+    required this.story,
+    required this.addons,
+    required this.knobs,
+  });
+
+  final WidgetbookStory<T, WidgetbookKnobs<T>> story;
+  final List<WidgetbookAddon> addons;
+  final WidgetbookKnobs<T> knobs;
+
+  Widget build(BuildContext context) {
+    return story.build(context, addons, knobs);
+  }
+}

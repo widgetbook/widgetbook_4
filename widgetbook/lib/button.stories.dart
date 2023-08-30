@@ -11,7 +11,8 @@ const metadata = ComponentMetadata(
   description: 'A button to click on.',
 );
 
-final story = ButtonStory(
+final buttonStory = ButtonStory(
+  name: 'Default',
   setup: () {
     print('Setup');
   },
