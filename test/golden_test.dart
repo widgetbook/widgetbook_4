@@ -2,7 +2,6 @@ import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fruits_app/button.dart';
-import 'package:widgetbook_workspace/button.scenarios.g.dart';
 import 'package:widgetbook_workspace/button.stories.dart';
 import 'package:widgetbook_workspace/widgetbook_4.dart';
 
@@ -17,16 +16,16 @@ void main() {
           children: [
             // The [ButtonScenario] is used with different combination of addons
             // and knobs to generate different scenarios.
-            ButtonScenario(
+            buttonStory.toScenario(
               addons: [],
-              knobs: ButtonKnobs(
+              args: ButtonArgs(
                 text: 'Short',
                 color: Colors.black,
               ),
             ).scenario,
-            ButtonScenario(
+            buttonStory.toScenario(
               addons: [],
-              knobs: ButtonKnobs(
+              args: ButtonArgs(
                 text: 'Very LongLongLongLongLong Text',
                 color: Colors.black,
               ),

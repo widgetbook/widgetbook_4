@@ -1,10 +1,10 @@
 part of 'button.stories.dart';
 
-class ButtonStory extends WidgetbookStory<Button, ButtonKnobs> {
+class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
   ButtonStory({
     required super.name,
     required super.setup,
-    required super.knobs,
+    required super.args,
     required super.builder,
   });
 
@@ -15,8 +15,8 @@ class ButtonStory extends WidgetbookStory<Button, ButtonKnobs> {
       ).mergeWith(metadata);
 }
 
-class ButtonKnobs extends WidgetbookKnobs<Button> {
-  ButtonKnobs({
+class ButtonArgs extends WidgetbookArgs<Button> {
+  ButtonArgs({
     required this.text,
     required this.color,
   });

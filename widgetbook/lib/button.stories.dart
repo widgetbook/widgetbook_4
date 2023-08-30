@@ -17,21 +17,21 @@ final buttonStory = ButtonStory(
   setup: () {
     print('Setup');
   },
-  knobs: ButtonKnobs(
+  args: ButtonArgs(
     color: Colors.black,
     text: 'Text',
   ),
-  builder: (context, knobs) {
+  builder: (context, args) {
     return Button(
       // TODO: create knobs.metadata to avoid boilerplate
       text: context.knobs.string(
-        label: knobs.textMetadata.name,
-        description: knobs.textMetadata.description,
+        label: args.textMetadata.name,
+        description: args.textMetadata.description,
       ),
       color: context.knobs.color(
-        label: knobs.textMetadata.name,
-        description: knobs.textMetadata.description,
-        initialValue: knobs.color,
+        label: args.textMetadata.name,
+        description: args.textMetadata.description,
+        initialValue: args.color,
       ),
     );
   },

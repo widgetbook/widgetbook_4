@@ -38,55 +38,72 @@ abstract class WidgetbookComponent<T> {
   });
 
   final ComponentMetadata metadata;
-  final List<WidgetbookStory<T, WidgetbookKnobs<T>>> stories;
+  final List<WidgetbookStory<T, WidgetbookArgs<T>>> stories;
 }
 
-abstract class WidgetbookStory<T, TKnobs extends WidgetbookKnobs<T>> {
+abstract class WidgetbookStory<T, TArgs extends WidgetbookArgs<T>> {
   WidgetbookStory({
     required this.name,
     required this.setup,
-    required this.knobs,
+    required this.args,
     required this.builder,
   });
 
   final String name;
   final VoidCallback setup;
-  final TKnobs knobs;
-  final Widget Function(BuildContext context, TKnobs knobs) builder;
+  final TArgs args;
+  final Widget Function(BuildContext context, TArgs args) builder;
 
   ComponentMetadata get component;
 
   Widget build(
     BuildContext context,
     List<WidgetbookAddon> addons,
-    TKnobs knobs,
+    TArgs args,
   ) {
     return Column(
       children: [
         Text('Building with ${addons.length} addons}'),
-        builder(context, knobs),
+        builder(context, args),
       ],
+    );
+  }
+
+  WidgetbookScenario<T> toScenario({
+    required List<WidgetbookAddon> addons,
+    required WidgetbookArgs<T> args,
+  }) {
+    return WidgetbookScenario<T>(
+      story: this,
+      addons: addons,
+      args: args,
     );
   }
 }
 
-// TODO: Resolve name confusion as this are args and not knobs.
-abstract class WidgetbookKnobs<T> {}
+abstract class WidgetbookArgs<T> {
+  Widget build(BuildContext context);
+}
 
-abstract class WidgetbookScenario<T> {
+class WidgetbookScenario<T> {
   const WidgetbookScenario({
     required this.story,
     required this.addons,
-    required this.knobs,
+    required this.args,
   });
 
-  final WidgetbookStory<T, WidgetbookKnobs<T>> story;
+  final WidgetbookStory<T, WidgetbookArgs<T>> story;
   final List<WidgetbookAddon> addons;
-
-  // TODO: Resolve confusion betweeen these knobs and [story.knobs].
-  final WidgetbookKnobs<T> knobs;
+  final WidgetbookArgs<T> args;
 
   Widget build(BuildContext context) {
-    return story.build(context, addons, knobs);
+    return Column(
+      children: [
+        Text('WidgetbookScope'),
+        Text('WidgetbookState'),
+        Text('Building with ${addons.length} addons}'),
+        args.build(context),
+      ],
+    );
   }
 }
