@@ -23,11 +23,14 @@ final buttonStory = ButtonStory(
   ),
   builder: (context, knobs) {
     return Button(
+      // TODO: create knobs.metadata to avoid boilerplate
       text: context.knobs.string(
-        label: 'Text',
+        label: knobs.textMetadata.name,
+        description: knobs.textMetadata.description,
       ),
       color: context.knobs.color(
-        label: 'Color',
+        label: knobs.textMetadata.name,
+        description: knobs.textMetadata.description,
         initialValue: knobs.color,
       ),
     );
