@@ -20,10 +20,10 @@ abstract class WidgetbookComponent<T> {
   });
 
   final ComponentMetadata metadata;
-  final List<WidgetbookStory<T>> stories;
+  final List<WidgetbookStory<T, WidgetbookKnobs<T>>> stories;
 }
 
-class WidgetbookStory<T> {
+class WidgetbookStory<TComponent, TKnobs extends WidgetbookKnobs<TComponent>> {
   WidgetbookStory({
     required this.setup,
     required this.knobs,
@@ -31,8 +31,11 @@ class WidgetbookStory<T> {
   });
 
   final VoidCallback setup;
-  final WidgetbookKnobs<T> knobs;
-  final Widget Function(BuildContext context, WidgetbookKnobs<T> knobs) builder;
+  final TKnobs knobs;
+  final Widget Function(
+    BuildContext context,
+    TKnobs knobs,
+  ) builder;
 
   Widget build(BuildContext context, List<WidgetbookAddon> addons) {
     return Column(

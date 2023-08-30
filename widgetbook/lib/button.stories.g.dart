@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/button.dart';
 import 'package:widgetbook_fruits_app/widgetbook_4.dart';
 
-class ButtonStory extends WidgetbookStory {
+class ButtonStory extends WidgetbookStory<Button> {
   ButtonStory({
     required super.setup,
     required super.knobs,
@@ -10,7 +10,7 @@ class ButtonStory extends WidgetbookStory {
   });
 }
 
-class ButtonKnobs extends WidgetbookKnobs {
+class ButtonKnobs extends WidgetbookKnobs<Button> {
   ButtonKnobs({
     required this.text,
     required this.color,
