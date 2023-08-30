@@ -22,7 +22,7 @@ dev_dependencies:
       url: https://github.com/ABausG/alchemist/
       ref: flutter-3-13
 
-  # Cyclic Dependency
+  #TODO: Resolve confusion cyclic dependency confusion.
   widgetbook_fruits_app:
     path: widgetbook
 

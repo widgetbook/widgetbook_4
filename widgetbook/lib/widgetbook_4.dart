@@ -70,6 +70,7 @@ abstract class WidgetbookStory<T, TKnobs extends WidgetbookKnobs<T>> {
   }
 }
 
+// TODO: Resolve name confusion as this are args and not knobs.
 abstract class WidgetbookKnobs<T> {}
 
 abstract class WidgetbookScenario<T> {
@@ -81,6 +82,8 @@ abstract class WidgetbookScenario<T> {
 
   final WidgetbookStory<T, WidgetbookKnobs<T>> story;
   final List<WidgetbookAddon> addons;
+
+  // TODO: Resolve confusion betweeen these knobs and [story.knobs].
   final WidgetbookKnobs<T> knobs;
 
   Widget build(BuildContext context) {
