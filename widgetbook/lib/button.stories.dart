@@ -23,15 +23,16 @@ final buttonStory = ButtonStory(
   ),
   builder: (context, args) {
     return Button(
-      // TODO: create knobs.metadata to avoid boilerplate
+      // TODO: create knobs.fromArg to avoid boilerplate
+      // TODO: remove context.knobs -> knobs
       text: context.knobs.string(
-        label: args.textMetadata.name,
-        description: args.textMetadata.description,
+        label: args.text.name,
+        description: args.text.description,
       ),
       color: context.knobs.color(
-        label: args.textMetadata.name,
-        description: args.textMetadata.description,
-        initialValue: args.color,
+        label: args.color.name,
+        description: args.color.description,
+        initialValue: args.color.value,
       ),
     );
   },

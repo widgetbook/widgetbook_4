@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
-class ArgMetadata {
-  const ArgMetadata({
+class WidgetbookArg<T> {
+  const WidgetbookArg({
+    required this.value,
     required this.name,
-    required this.description,
+    this.description,
   });
 
+  final T value;
   final String name;
+
+  // From doc comment
   final String? description;
+
+  // EXPERIMENTAL
+  // Widgetbook.material{
+  //   argsResolver: <T, T Function(WidgetbookArg<T>)>{
+  //   String: (arg) => StringKnob(arg.name...),
+  //   Double: ???
+  //   FooVar: (WidgetbookArg<FooVar> arg) =>
+  // }}
+  // T toKnob() {
+  //  final resolver = argsResolver[T];
+  //  return resolver(this);
+  // }
 }
 
 class ComponentMetadata {

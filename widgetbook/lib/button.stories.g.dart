@@ -17,27 +17,26 @@ class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
 
 class ButtonArgs extends WidgetbookArgs<Button> {
   ButtonArgs({
-    required this.text,
-    required this.color,
-  });
+    required String text,
+    required Color color,
+  })  : this.text = WidgetbookArg<String>(
+          value: text,
+          name: 'Text',
+          description: 'The text of this button.',
+        ),
+        this.color = WidgetbookArg<Color>(
+          value: color,
+          name: 'Color',
+          description: 'The background color of this button.',
+        );
 
-  final String text;
-  final Color color;
-
-  final ArgMetadata textMetadata = ArgMetadata(
-    name: 'Text',
-    description: 'The text of this button.', // From doc comment
-  );
-
-  final ArgMetadata colorMetadata = ArgMetadata(
-    name: 'Color',
-    description: 'The background color of this button.', // From doc comment
-  );
+  final WidgetbookArg<String> text;
+  final WidgetbookArg<Color> color;
 
   Widget build(BuildContext context) {
     return Button(
-      text: text,
-      color: color,
+      text: text.value,
+      color: color.value,
     );
   }
 }
