@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/button.dart';
 import 'package:widgetbook/widgetbook.dart';
-import 'package:widgetbook_fruits_app/widgetbook_4.dart';
+
+import 'widgetbook_4.dart';
 
 part 'button.stories.g.dart';
 

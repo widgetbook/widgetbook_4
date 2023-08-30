@@ -23,7 +23,7 @@ dev_dependencies:
       ref: flutter-3-13
 
   #TODO: Resolve confusion cyclic dependency confusion.
-  widgetbook_fruits_app:
+  widgetbook_workspace:
     path: widgetbook
 
 flutter:

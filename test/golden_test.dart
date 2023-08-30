@@ -2,9 +2,9 @@ import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fruits_app/button.dart';
-import 'package:widgetbook_fruits_app/button.scenarios.g.dart';
-import 'package:widgetbook_fruits_app/button.stories.dart';
-import 'package:widgetbook_fruits_app/widgetbook_4.dart';
+import 'package:widgetbook_workspace/button.scenarios.g.dart';
+import 'package:widgetbook_workspace/button.stories.dart';
+import 'package:widgetbook_workspace/widgetbook_4.dart';
 
 void main() {
   group(
