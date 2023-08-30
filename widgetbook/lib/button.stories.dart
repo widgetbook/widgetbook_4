@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/button.dart';
 import 'package:widgetbook/widgetbook.dart';
-import 'package:widgetbook_fruits_app/button.stories.g.dart';
 import 'package:widgetbook_fruits_app/widgetbook_4.dart';
+
+part 'button.stories.g.dart';
 
 const metadata = ComponentMetadata(
   name: 'Button 4',
@@ -20,7 +21,9 @@ final story = ButtonStory(
   ),
   builder: (context, knobs) {
     return Button(
-      text: context.knobs.string(label: 'Text'),
+      text: context.knobs.string(
+        label: 'Text',
+      ),
       color: context.knobs.color(
         label: 'Color',
         initialValue: knobs.color,

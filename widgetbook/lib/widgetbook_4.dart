@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
-class ComponentMetadata {
-  const ComponentMetadata({
+class ArgMetadata {
+  const ArgMetadata({
     required this.name,
-    required this.type,
     required this.description,
   });
 
   final String name;
+  final String? description;
+}
+
+class ComponentMetadata {
+  const ComponentMetadata({
+    required this.type,
+    required this.name,
+    required this.description,
+  });
+
   final Type type;
-  final String description;
+  final String? name;
+  final String? description;
+
+  ComponentMetadata mergeWith(ComponentMetadata other) {
+    return ComponentMetadata(
+      type: type,
+      name: other.name ?? name,
+      description: other.description ?? description,
+    );
+  }
 }
 
 abstract class WidgetbookComponent<T> {
@@ -23,7 +41,7 @@ abstract class WidgetbookComponent<T> {
   final List<WidgetbookStory<T, WidgetbookKnobs<T>>> stories;
 }
 
-class WidgetbookStory<TComponent, TKnobs extends WidgetbookKnobs<TComponent>> {
+abstract class WidgetbookStory<T, TKnobs extends WidgetbookKnobs<T>> {
   WidgetbookStory({
     required this.setup,
     required this.knobs,
@@ -32,10 +50,9 @@ class WidgetbookStory<TComponent, TKnobs extends WidgetbookKnobs<TComponent>> {
 
   final VoidCallback setup;
   final TKnobs knobs;
-  final Widget Function(
-    BuildContext context,
-    TKnobs knobs,
-  ) builder;
+  final Widget Function(BuildContext context, TKnobs knobs) builder;
+
+  ComponentMetadata get component;
 
   Widget build(BuildContext context, List<WidgetbookAddon> addons) {
     return Column(
