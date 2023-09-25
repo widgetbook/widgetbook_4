@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+export 'package:widgetbook/widgetbook.dart';
+
 class WidgetbookArg<T> {
   const WidgetbookArg({
     required this.value,

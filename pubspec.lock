@@ -241,6 +241,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  widgetbook_4:
+    dependency: "direct dev"
+    description:
+      path: widgetbook_4
+      relative: true
+    source: path
+    version: "4.0.0"
   widgetbook_workspace:
     dependency: "direct dev"
     description:

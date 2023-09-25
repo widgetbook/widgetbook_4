@@ -26,7 +26,7 @@ packages:
     source: hosted
     version: "1.1.0"
   flutter:
-    dependency: "direct main"
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -38,13 +38,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
-  fruits_app:
-    dependency: "direct main"
-    description:
-      path: ".."
-      relative: true
-    source: path
-    version: "1.0.0+1"
   json_annotation:
     dependency: transitive
     description:
@@ -107,20 +100,13 @@ packages:
     source: hosted
     version: "0.1.4-beta"
   widgetbook:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: widgetbook
       sha256: e2b6bbec0b7805037cb58937200461d0c19fcfdd50dc21fc3ceb558f2489a710
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
-  widgetbook_4:
-    dependency: "direct main"
-    description:
-      path: "../widgetbook_4"
-      relative: true
-    source: path
-    version: "4.0.0"
 sdks:
   dart: ">=3.1.0 <4.0.0"
   flutter: ">=3.0.0"

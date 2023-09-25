@@ -22,9 +22,11 @@ dev_dependencies:
       url: https://github.com/ABausG/alchemist/
       ref: flutter-3-13
 
-  #TODO: Resolve confusion cyclic dependency confusion.
+  #TODO: Resolve cyclic dependency confusion.
   widgetbook_workspace:
     path: widgetbook
+  widgetbook_4:
+    path: widgetbook_4
 
 flutter:
   uses-material-design: true

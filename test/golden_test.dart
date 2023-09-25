@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fruits_app/button.dart';
 import 'package:widgetbook_workspace/button.stories.dart';
-import 'package:widgetbook_workspace/widgetbook_4.dart';
+import 'package:widgetbook_4/widgetbook_4.dart';
 
 void main() {
   group(

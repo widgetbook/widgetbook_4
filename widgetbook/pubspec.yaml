@@ -9,7 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  widgetbook: ^3.0.0
+  widgetbook_4: 
+    path: ../widgetbook_4
   fruits_app:
     path: ../
 
