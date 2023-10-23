@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   widgetbook_4: 
-    path: ../widgetbook_4
+    path: ../../widgetbook_4
   fruits_app:
     path: ../
 

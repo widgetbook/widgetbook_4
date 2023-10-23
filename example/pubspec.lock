@@ -244,7 +244,7 @@ packages:
   widgetbook_4:
     dependency: "direct dev"
     description:
-      path: widgetbook_4
+      path: "../widgetbook_4"
       relative: true
     source: path
     version: "4.0.0"
