@@ -15,14 +15,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # Using this fork as alchemist is not currently
-  # compatible with Flutter 3.13
-  alchemist:
-    git:
-      url: https://github.com/ABausG/alchemist/
-      ref: flutter-3-13
+  # For golden testing:
+  alchemist: ^0.7.0
 
-  #TODO: Resolve cyclic dependency confusion.
+  # TODO: Resolve cyclic dependency confusion.
   widgetbook_workspace:
     path: widgetbook
   widgetbook_4:
