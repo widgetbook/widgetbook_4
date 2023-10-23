@@ -10,28 +10,22 @@ const metadata = ComponentMetadata(
   description: 'A button to click on.',
 );
 
-final buttonStory = ButtonStory(
+final defaultButton = ButtonStory(
   name: 'Default',
-  setup: () {
-    print('Setup');
-  },
+  setup: () => print('Mocking'),
   args: ButtonArgs(
-    color: Colors.black,
-    text: 'Text',
+    // Alternate syntaxes to explore:
+    // color: ($) => Colors.red,
+    // color: ($) => $.add(ColorArg(...)),
+    // color: Arg.value(Colors.red),
+    // color: Arg.knob(Knob(...)),
+    color: ColorArg(
+      Colors.red,
+      name: 'Background Color',
+      description: 'The background color of this button.',
+    ),
+    // If no name or description is provided, the name of the field will be used
+    // as name and the doc comment of the field will be used as description.
+    text: StringArg('Press'),
   ),
-  builder: (context, args) {
-    return Button(
-      // TODO: create knobs.fromArg to avoid boilerplate
-      // TODO: remove context.knobs -> knobs
-      text: context.knobs.string(
-        label: args.text.name,
-        description: args.text.description,
-      ),
-      color: context.knobs.color(
-        label: args.color.name,
-        description: args.color.description,
-        initialValue: args.color.value,
-      ),
-    );
-  },
 );

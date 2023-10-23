@@ -5,6 +5,15 @@ import 'package:fruits_app/button.dart';
 import 'package:widgetbook_workspace/button.stories.dart';
 import 'package:widgetbook_4/widgetbook_4.dart';
 
+/// An extension that converts [WidgetbookScenario] to [GoldenTestScenario].
+/// Will be replaced by more scalable solution in the future.
+extension AlchemistConverter on WidgetbookScenario {
+  GoldenTestScenario get alchemist => GoldenTestScenario.builder(
+        name: story.name,
+        builder: build,
+      );
+}
+
 void main() {
   group(
     '$Button Golden Tests',
@@ -16,32 +25,25 @@ void main() {
           children: [
             // The [ButtonScenario] is used with different combination of addons
             // and knobs to generate different scenarios.
-            buttonStory.toScenario(
+            ButtonScenario(
+              story: defaultButton,
               addons: [],
               args: ButtonArgs(
-                text: 'Short',
-                color: Colors.black,
+                color: ColorArg(Colors.black),
+                text: StringArg('Short'),
               ),
-            ).scenario,
-            buttonStory.toScenario(
+            ).alchemist,
+            ButtonScenario(
+              story: defaultButton,
               addons: [],
               args: ButtonArgs(
-                text: 'Very LongLongLongLongLong Text',
-                color: Colors.black,
+                color: ColorArg(Colors.black),
+                text: StringArg('Very LongLongLongLongLong Text'),
               ),
-            ).scenario,
+            ).alchemist,
           ],
         ),
       );
     },
   );
-}
-
-/// An extension that converts [WidgetbookScenario] to [GoldenTestScenario].
-/// Will be replaced by more scalable solution in the future.
-extension AlchemistConverter on WidgetbookScenario {
-  GoldenTestScenario get scenario => GoldenTestScenario.builder(
-        name: story.name,
-        builder: build,
-      );
 }
