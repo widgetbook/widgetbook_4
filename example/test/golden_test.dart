@@ -41,6 +41,40 @@ void main() {
                 text: StringArg('Very LongLongLongLongLong Text'),
               ),
             ).alchemist,
+            // TODO: improve the syntax here
+            ...ButtonScenario.matrix(
+              story: defaultButton,
+              addons: [
+                [
+                  MaterialThemeAddon(
+                    themes: [
+                      WidgetbookTheme(
+                        name: 'dark',
+                        data: ThemeData.dark(),
+                      )
+                    ],
+                  ),
+                  MaterialThemeAddon(
+                    themes: [
+                      WidgetbookTheme(
+                        name: 'light',
+                        data: ThemeData.light(),
+                      )
+                    ],
+                  )
+                ],
+              ],
+              args: [
+                ButtonArgs(
+                  text: StringArg('Text'),
+                  color: ColorArg(Colors.red),
+                ),
+                ButtonArgs(
+                  text: StringArg('Text Or Not Text'),
+                  color: ColorArg(Colors.black),
+                ),
+              ],
+            ).map((e) => e.alchemist).toList(),
           ],
         ),
       );
