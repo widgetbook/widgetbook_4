@@ -1,6 +1,8 @@
 # Widgetbook 4: A Clean Slate
 
-## Widgetbook 3 Problems
+## Why?
+
+Widgetbook 3 is now facing some issues that result in a bad developer experience or some limitations. These issues are:
 
 1. Use-cases are **not reusable for tests**, they cannot be easily used for golden or widget tests.
 2. Mocking use-cases dependencies is not easy, because using mocking library is weird thing to do if `widgetbook` is not a dev dependency.
@@ -16,14 +18,18 @@
 
 In Widgetbook 4.0 (where the burgers are finally on _master chef_ level 🍔), we aim to introduce a well thought out structure on how to work and maintain Widgetbook for any size of project featuring poly and mono repo approaches as well as quick-setups to try out Widgetbook.
 
-Some terminologies (along with their code names) will be changed as follow:
+### Terminology
 
-1. Use-case → Story
-2. Knob → Arg
+Some terminologies (along with their code names) will be changed as follows:
+
+| Old Name | New Name |
+| -------- | -------- |
+| Use-case | Story    |
+| Knob     | Arg      |
 
 ### Project Structure
 
-Widgetbook projects will now be defined inside a separate package as follows:
+Widgetbook projects will now be defined inside a **separate package** as follows:
 
 ```
 # Polyrepo
@@ -50,190 +56,146 @@ Widgetbook projects will now be defined inside a separate package as follows:
 └── pubspec.yaml # app
 ```
 
-There will be an intentional cyclic dependencies between `widgetbook_workspace` projects and `app` projects because:
+There will be an **intentional cyclic dependency** _(sorry for using the c-word, we know it hurts)_ between `widgetbook_workspace` projects and `app` projects because:
 
 1. `widgetbook_workspace` project needs dependency on `app` to catalog the widgets defined there.
 2. `app` needs dependency on `widgetbook_workspace` to define the tests inside the `test` folder, re-using the stories defined in the workspace.
 
 ### Story Structure
 
-Stories will now be created in a file named `<component>.stories.dart`. This file will contain:
+> [!IMPORTANT]
+> Full code can be found in [`button.stories.dart`](./example/widgetbook/lib/button.stories.dart) or [`home_screen.stories.dart`](./example/widgetbook/lib/home_screen.stories.dart).
+
+Stories will now be created in a file named `<component>.stories.dart`. The `.stories.dart` file extension makes it easier for the generator to find these files. This file will contain:
 
 1. Metadata about the Component itself (e.g. name, description, etc.)
 2. Stories definitions.
 
-> [!NOTE]
-> 💡 The `.stories.dart` file extension makes it easier for the generator to find these files.
+The workflow for cataloging widgets will be as follows:
 
-Here’s an example of what the users will be writing:
+1. Write the widget as usual in a file named `<component>.dart` inside the **app directory**. Here is an example of a `Button` widget defined in [`button.dart`](./example/lib/button.dart):
 
-```dart
-import 'package:flutter/material.dart';
+   ```dart
+   /// A button to click on.
+   class Button extends StatelessWidget {
+     const Button({
+       super.key,
+       required this.text,
+       required this.color,
+     });
 
-/// A button to click on.
-class Button extends StatelessWidget {
-  const Button({
-    super.key,
-    required this.text,
-    required this.color,
-  });
+     /// The text of this button.
+     final String text;
 
-  /// The text of this button.
-  final String text;
+     /// The background color of this button.
+     final Color color;
 
-  /// The background color of this button.
-  final Color color;
+     @override
+     Widget build(BuildContext context) {
+       return Container(
+         color: color,
+         child: Text(text),
+       );
+     }
+   }
+   ```
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: color,
-      child: Text(text),
-    );
-  }
-}
-```
+1. Create a file named [`button.stories.dart`](./example/widgetbook/lib/button.stories.dart) inside the **`widgetbook` directory** with the following content:
 
-```dart
-import 'package:user_app/button.dart';
-import 'package:widgetbook/widgetbook.dart';
+   ```dart
+   import 'package:user_app/button.dart';
+   import 'package:widgetbook/widgetbook.dart';
 
-part 'button.stories.g.dart';
+   part 'button.stories.g.dart';
 
-const metadata = ComponentMetadata(
-  type: Button, // Used to generate the ButtonArgs
-  name: 'Primary button', // Defaults to type's name
-  description: 'A button to click on.', // Defaults to type's doc comment
-);
-```
+   const metadata = ComponentMetadata(
+     type: Button, // Used to for code generation
+     // Optional config here...
+   );
+   ```
 
-The above code is enough to generate the following:
+1. After running the generator _(or possibly a Widgetbook CLI command)_, the following content will be generated in [`button.stories.g.dart`](./example/widgetbook/lib/button.stories.g.dart):
 
-```dart
-part of 'button.stories.dart';
+   ```dart
+   part of 'button.stories.dart';
 
-typedef ButtonScenario = WidgetbookScenario<Button>;
+   typedef ButtonScenario = WidgetbookScenario<Button>;
 
-class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
-  ButtonStory({
-    required super.name,
-    super.setup,
-    required super.args,
-    super.builder,
-  });
-}
+   class ButtonStory extends WidgetbookStory<Button, ButtonArgs> { ... }
 
-/// A wrapper around the constructor of [Button] that allows to pass
-/// [Arg] instead of the constructor arguments.
-class ButtonArgs extends WidgetbookArgs<Button> {
-  ButtonArgs({
-    required Arg<String> text,
-    required Arg<Color> color,
-  })  : this.text = text.mergeWith(
-          name: 'Text',
-          description: 'The text of this button.',
-        ),
-        this.color = color.mergeWith(
-          name: 'Color',
-          description: 'The background color of this button.',
-        );
+   class ButtonArgs extends WidgetbookArgs<Button> { ... }
+   ```
 
-  final Arg<String> text;
-  final Arg<Color> color;
+1. They can now define stories in [`button.stories.dart`](./example/widgetbook/lib/button.stories.dart) with the following content using the generated classes
 
-  Widget build(BuildContext context) {
-    return Button(
-      text: text.value,
-      color: color.value,
-    );
-  }
-}
-```
-
-Then users can define the story as follows:
-
-```dart
-// final metadata = ...
-
-final defaultButton = ButtonStory(
-  name: 'Default',
-  setup: () => print('Mocking'),
-  args: ButtonArgs(
-    // Alternate syntaxes to explore:
-    // color: ($) => Colors.red,
-    // color: ($) => $.add(ColorArg(...)),
-    // color: Arg.value(Colors.red),
-    // color: Arg.knob(Knob(...)),
-    color: ColorArg(
-      Colors.red,
-      name: 'Background Color',
-      description: 'The background color of this button.',
-    ),
-    // If no name or description is provided, the name of the field will be used
-    // as name and the doc comment of the field will be used as description.
-    text: StringArg('Press'),
-  ),
-);
-```
+   ```dart
+   final defaultButton = ButtonStory(
+     name: 'Default',
+     args: ButtonArgs(
+       text: StringArg('Press'),
+       color: ColorArg(
+         Colors.red,
+         name: 'Background Color',
+         description: '....',
+       ),
+     ),
+   );
+   ```
 
 ### Golden Tests Structure
 
-When it comes to widget or golden testing, [OSS Developer](https://www.notion.so/OSS-Developer-bff800fc1e7647a4af8d3165f607083f?pvs=21)s can re-use stories and convert them to scenarios. Since stories define the way a component is build, a story just needs to define the used addons and the default value of the knobs.
+> [!IMPORTANT]
+> Full code can be found in [`golden_test.dart`](./example/test/golden_test.dart).
 
-```dart
-import 'package:alchemist/alchemist.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:user_app/button.dart';
-import 'package:widgetbook_workspace/button.stories.dart';
-import 'package:widgetbook/widgetbook.dart';
+When it comes to widget or golden testing, users can re-use stories and convert them to scenarios. Since stories define the way a component is build, a story just needs to define the used addons and the default value of the args.
 
-void main() {
-  group(
-    '$Button Golden Tests',
-    () {
-      goldenTest(
-        'renders correctly',
-        fileName: '$Button',
-        builder: () => GoldenTestGroup(
-          children: [
-            ButtonScenario(
-              story: defaultButton,
-              addons: [],
-              args: ButtonArgs(
-                color: ColorArg(Colors.black),
-                text: StringArg('Short'),
-              ),
-            ),
-            ButtonScenario(
-              story: defaultButton,
-              addons: [],
-              args: ButtonArgs(
-                color: ColorArg(Colors.black),
-                text: StringArg('Very LongLongLongLongLong Text'),
-              ),
-            ),
-            ButtonScenario.matrix(
-                addons: [
-                    [DeviceAddon(device: iphoneX), ThemeAddon(dark)],
-                    [DeviceAddon(device: iphoneX), ThemeAddon(light)],
-                ],
-                args: [ButtonArgs(), ButtonArgs(), ButtonArgs()]
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-```
+1. **Single Scenario:**
+
+   ```dart
+   ButtonScenario(
+     story: defaultButton,
+     addons: [],
+     args: ButtonArgs(
+       color: ColorArg(Colors.black),
+       text: StringArg('Very LongLongLongLongLong Text'),
+     ),
+   ),
+   ```
+
+1. **Matrix Scenario:**  
+   Generates 4 scenarios in the following case:
+
+   1. Dark Theme + First Args
+   2. Dark Theme + Second Args
+   3. Light Theme + First Args
+   4. Light Theme + Second Args
+
+   ```dart
+   ButtonScenario.matrix(
+     story: defaultButton,
+     addons: [
+       [
+         MaterialThemeAddon(...), // Dark Theme
+         MaterialThemeAddon(...), // Light Theme
+       ],
+     ],
+     args: [
+       ButtonArgs(...), // First Args
+       ButtonArgs(...), // Second Args
+     ],
+   )
+   ```
 
 ## CLI 4
 
-Widgetbook 4 will be so dependent on the CLI, you can use the CLI to init, run, publish Widgetbook. Here are some commands that we can add:
+Widgetbook 4 will be so dependent on the CLI to make it easier to add features in the future. Here are some commands that we _might_ add:
 
-1. `widgetbook login`: Gets user API key via a login redirect, then stores the values in a global config file.
-2. `widgetbook init`: creates new project template. Should prompt the user for things like GitHub Actions and Widgetbook Cloud.
-3. `widgetbook run platform`: similar to `flutter run` and will be used for tracking as well.
+| Command                     | Description                                                                         |
+| --------------------------- | ----------------------------------------------------------------------------------- |
+| `widgetbook init`           | Creates a new project template, could prompt for Widgetbook Cloud or GitHub Actions |
+| `widgetbook login`          | Gets Widgetbook Cloud API key via a login redirect, and stores it                   |
+| `widgetbook run <platform>` | Similar to `flutter run`                                                            |
+| `widgetbook gen`            | Similar to `dart run build_runner` to generate the stories files                    |
 
 ## VSCode Plugin
 
@@ -241,10 +203,6 @@ We can have a plugin that helps:
 
 1. Navigating between Widget file and Stories file.
 2. Creating a template file for a story.
-
-## Tracking
-
-Tracking in Widgetbook 3 was done via the `widgetbook_generator` package. In Widgetbook 4, the CLI will be used more to track users behaviors.
 
 ## Consequences
 
