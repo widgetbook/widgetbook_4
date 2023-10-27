@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:widgetbook/widgetbook.dart' as v3;
+import 'package:widgetbook_4/src/mode.dart';
 
 import 'arg.dart';
 
@@ -22,14 +22,14 @@ abstract class WidgetbookStory<T, TArgs extends WidgetbookArgs<T>> {
 
   Widget build(
     BuildContext context,
-    List<v3.WidgetbookAddon> addons,
+    List<WidgetbookMode> modes,
     TArgs args,
   ) {
     final storyBuilder = builder ?? args.build;
 
     return Column(
       children: [
-        Text('Building with ${addons.length} addons}'),
+        Text('Building with ${modes.length} modes'),
         setup(
           context,
           storyBuilder(context, args),

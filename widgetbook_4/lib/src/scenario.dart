@@ -1,19 +1,19 @@
 import 'package:flutter/widgets.dart';
-import 'package:widgetbook/widgetbook.dart' as v3;
 
 import 'arg.dart';
+import 'mode.dart';
 import 'story.dart';
 
 class WidgetbookScenario<T> {
   const WidgetbookScenario({
     required this.story,
-    required this.addons,
+    this.modes,
     required this.args,
   });
 
   static List<WidgetbookScenario<T>> matrix<T>({
     required WidgetbookStory<T, WidgetbookArgs<T>> story,
-    required List<List<v3.WidgetbookAddon>> addons,
+    List<List<WidgetbookMode>>? modes,
     required List<WidgetbookArgs<T>> args,
   }) {
     // Should permutate addons and args
@@ -21,7 +21,7 @@ class WidgetbookScenario<T> {
   }
 
   final WidgetbookStory<T, WidgetbookArgs<T>> story;
-  final List<v3.WidgetbookAddon> addons;
+  final List<WidgetbookMode>? modes;
   final WidgetbookArgs<T> args;
 
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class WidgetbookScenario<T> {
       children: [
         Text('WidgetbookScope'),
         Text('WidgetbookState'),
-        Text('Building with ${addons.length} addons}'),
+        Text('Building with ${modes?.length} modes}'),
         args.build(context),
       ],
     );

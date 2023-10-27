@@ -25,6 +25,7 @@ Some terminologies (along with their code names) will be changed as follows:
 | Old Name | New Name |
 | -------- | -------- |
 | Use-case | Story    |
+| Addon    | Mode     |
 | Knob     | Arg      |
 
 ### Project Structure
@@ -104,7 +105,6 @@ The workflow for cataloging widgets will be as follows:
 
    ```dart
    import 'package:user_app/button.dart';
-   import 'package:widgetbook/widgetbook.dart';
 
    part 'button.stories.g.dart';
 
@@ -147,14 +147,14 @@ The workflow for cataloging widgets will be as follows:
 > [!IMPORTANT]
 > Full code can be found in [`golden_test.dart`](./example/test/golden_test.dart).
 
-When it comes to widget or golden testing, users can re-use stories and convert them to scenarios. Since stories define the way a component is build, a story just needs to define the used addons and the default value of the args.
+When it comes to widget or golden testing, users can re-use stories and convert them to scenarios. Since stories define the way a component is build, a story just needs to define the used modes and the default value of the args.
 
 1. **Single Scenario:**
 
    ```dart
    ButtonScenario(
      story: $DefaultButton,
-     addons: [],
+     modes: [],
      args: ButtonArgs(
        color: ColorArg(Colors.black),
        text: StringArg('Very LongLongLongLongLong Text'),
@@ -173,11 +173,9 @@ When it comes to widget or golden testing, users can re-use stories and convert 
    ```dart
    ButtonScenario.matrix(
      story: $DefaultButton,
-     addons: [
-       [
-         MaterialThemeAddon(...), // Dark Theme
-         MaterialThemeAddon(...), // Light Theme
-       ],
+     modes: [
+      [ThemeMode.value(ThemeData.dark())], // Dark Theme
+      [ThemeMode.value(ThemeData.light())] // Light Theme
      ],
      args: [
        ButtonArgs(...), // First Args

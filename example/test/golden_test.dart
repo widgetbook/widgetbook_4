@@ -1,5 +1,5 @@
 import 'package:alchemist/alchemist.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fruits_app/button.dart';
 import 'package:widgetbook_workspace/button.stories.dart';
@@ -27,7 +27,7 @@ void main() {
             // and knobs to generate different scenarios.
             ButtonScenario(
               story: $DefaultButton,
-              addons: [],
+              modes: [],
               args: ButtonArgs(
                 color: ColorArg(Colors.black),
                 text: StringArg('Short'),
@@ -35,34 +35,17 @@ void main() {
             ).alchemist,
             ButtonScenario(
               story: $DefaultButton,
-              addons: [],
+              modes: [],
               args: ButtonArgs(
                 color: ColorArg(Colors.black),
                 text: StringArg('Very LongLongLongLongLong Text'),
               ),
             ).alchemist,
-            // TODO: improve the syntax here
             ...ButtonScenario.matrix(
               story: $DefaultButton,
-              addons: [
-                [
-                  MaterialThemeAddon(
-                    themes: [
-                      WidgetbookTheme(
-                        name: 'dark',
-                        data: ThemeData.dark(),
-                      )
-                    ],
-                  ),
-                  MaterialThemeAddon(
-                    themes: [
-                      WidgetbookTheme(
-                        name: 'light',
-                        data: ThemeData.light(),
-                      )
-                    ],
-                  )
-                ],
+              modes: [
+                [ThemeMode.value(ThemeData.dark())],
+                [ThemeMode.value(ThemeData.light())]
               ],
               args: [
                 ButtonArgs(
