@@ -5,15 +5,25 @@ import 'package:widgetbook_4/widgetbook_4.dart';
 part 'button.stories.g.dart';
 
 const metadata = ComponentMetadata(
-  name: 'Button 4',
   type: Button,
+  name: 'Button 4',
   description: 'A button to click on.',
+  designUrl: 'https://www.figma.com/file/...',
+  documentation: '''
+  Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit.
+   1. Nullam euismod, nisl eget aliquam ultricies, quam odio
+      luctus nunc, nec aliquam diam diam ut risus.
+   2. Nulla facilisi. nisl eget aliquam ultricies.
+  ''',
 );
 
 final defaultButton = ButtonStory(
   name: 'Default',
   setup: () => print('Mocking'),
   args: ButtonArgs(
+    // If no name or description is provided, the name of the field will be used
+    // as name and the doc comment of the field will be used as description.
+    text: StringArg('Press'),
     // Alternate syntaxes to explore:
     // color: ($) => Colors.red,
     // color: ($) => $.add(ColorArg(...)),
@@ -24,8 +34,5 @@ final defaultButton = ButtonStory(
       name: 'Background Color',
       description: 'The background color of this button.',
     ),
-    // If no name or description is provided, the name of the field will be used
-    // as name and the doc comment of the field will be used as description.
-    text: StringArg('Press'),
   ),
 );
