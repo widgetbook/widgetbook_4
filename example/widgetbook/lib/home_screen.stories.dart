@@ -11,7 +11,7 @@ const metadata = ComponentMetadata(
   type: HomeScreen,
 );
 
-final defaultHomeScreen = HomeScreenStory(
+final $DefaultHomeScreen = HomeScreenStory(
   name: 'Default',
   setup: (context, child) {
     // Since HomeScreen needs UserProvider,

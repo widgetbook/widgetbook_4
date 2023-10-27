@@ -129,7 +129,7 @@ The workflow for cataloging widgets will be as follows:
 1. They can now define stories in [`button.stories.dart`](./example/widgetbook/lib/button.stories.dart) with the following content using the generated classes
 
    ```dart
-   final defaultButton = ButtonStory(
+   final $DefaultButton = ButtonStory(
      name: 'Default',
      args: ButtonArgs(
        text: StringArg('Press'),
@@ -153,7 +153,7 @@ When it comes to widget or golden testing, users can re-use stories and convert 
 
    ```dart
    ButtonScenario(
-     story: defaultButton,
+     story: $DefaultButton,
      addons: [],
      args: ButtonArgs(
        color: ColorArg(Colors.black),
@@ -172,7 +172,7 @@ When it comes to widget or golden testing, users can re-use stories and convert 
 
    ```dart
    ButtonScenario.matrix(
-     story: defaultButton,
+     story: $DefaultButton,
      addons: [
        [
          MaterialThemeAddon(...), // Dark Theme

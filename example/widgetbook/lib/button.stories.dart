@@ -17,7 +17,7 @@ const metadata = ComponentMetadata(
   ''',
 );
 
-final defaultButton = ButtonStory(
+final $DefaultButton = ButtonStory(
   name: 'Default',
   args: ButtonArgs(
     // If no name or description is provided, the name of the field will be used

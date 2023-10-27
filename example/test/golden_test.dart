@@ -26,7 +26,7 @@ void main() {
             // The [ButtonScenario] is used with different combination of addons
             // and knobs to generate different scenarios.
             ButtonScenario(
-              story: defaultButton,
+              story: $DefaultButton,
               addons: [],
               args: ButtonArgs(
                 color: ColorArg(Colors.black),
@@ -34,7 +34,7 @@ void main() {
               ),
             ).alchemist,
             ButtonScenario(
-              story: defaultButton,
+              story: $DefaultButton,
               addons: [],
               args: ButtonArgs(
                 color: ColorArg(Colors.black),
@@ -43,7 +43,7 @@ void main() {
             ).alchemist,
             // TODO: improve the syntax here
             ...ButtonScenario.matrix(
-              story: defaultButton,
+              story: $DefaultButton,
               addons: [
                 [
                   MaterialThemeAddon(
