@@ -9,8 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  widgetbook_4: 
+  widgetbook_4:
     path: ../../widgetbook_4
+
+  # Weird seen as a dependency and not a dev_dependency,
+  # but the whole app is a dev app.
+  mocktail: ^1.0.0
+  provider: ^6.0.5
+
+  # Depend on app to catalog the widgets
   fruits_app:
     path: ../
 

@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 abstract class WidgetbookArgs<T> {
+  const WidgetbookArgs();
+
   /// Maps the args to a widget by passing them to the constructor as-is.
   Widget build(BuildContext context);
 }

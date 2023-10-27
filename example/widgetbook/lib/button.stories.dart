@@ -19,11 +19,6 @@ const metadata = ComponentMetadata(
 
 final defaultButton = ButtonStory(
   name: 'Default',
-  setup: (context, child) {
-    return Center(
-      child: child,
-    );
-  },
   args: ButtonArgs(
     // If no name or description is provided, the name of the field will be used
     // as name and the doc comment of the field will be used as description.

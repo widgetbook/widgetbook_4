@@ -8,8 +8,8 @@ typedef ButtonScenario = WidgetbookScenario<Button>;
 class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
   ButtonStory({
     required super.name,
-    required super.setup,
     required super.args,
+    super.setup,
     super.builder,
   });
 
