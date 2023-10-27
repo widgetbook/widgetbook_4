@@ -8,16 +8,6 @@ class Button extends StatelessWidget {
     required this.color,
   });
 
-  const Button.primary({
-    Key? key,
-    required String title,
-    required Color backgroundColor,
-  }) : this(
-          key: key,
-          text: title,
-          color: backgroundColor,
-        );
-
   /// The text of this button.
   final String text;
 
