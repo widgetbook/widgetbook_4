@@ -18,7 +18,7 @@ final $DefaultHomeScreen = HomeScreenStory(
     // some mocking is needed to be able to provide it.
     return ChangeNotifierProvider<UserProvider>(
       create: (_) => FakeUserProvider(),
-      child: HomeScreen(),
+      child: child,
     );
   },
 );
