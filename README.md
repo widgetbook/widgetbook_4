@@ -4,15 +4,15 @@
 
 Widgetbook 3 is now facing some issues that result in a bad developer experience or some limitations. These issues are:
 
-1. Use-cases are **not reusable for tests**, they cannot be easily used for golden or widget tests.
-2. Mocking use-cases dependencies is not easy, because using mocking library is weird thing to do if `widgetbook` is not a dev dependency.
-3. CLI is not actively used by users, which makes some features hard to implement.
-4. There is no defined structure for **projects**. It can be defined inside the `lib`, `test` or `widgetbook` folders, and each one has it’s pros and cons.
-5. There is no defined structure for **use-cases**. Users can do any of the following setups:
+1. There is no defined structure for **projects**. It can be defined inside the `lib`, `test` or `widgetbook` folders, and each one has it’s pros and cons.
+1. Generator is slow inside big projects, because all `.dart` files are taken as an input.
+1. Mocking use-cases dependencies is not easy, because using mocking library is weird thing to do if `widgetbook` is not a dev dependency.
+1. There is no defined structure for **use-cases**. Users can do any of the following setups:
    - They can define use-cases in the same file as the widget.
    - They can define all use-cases from different components in one file.
-6. Users need to define the `label` for knobs using a magic string that usually is the same name as the parameter name.
-7. Generator is slow inside big projects, because all `.dart` files are taken as an input.
+1. Use-cases are **not reusable for tests**, they cannot be easily used for golden or widget tests.
+1. Users need to define the `label` for knobs using a magic string that usually is the same name as the parameter name.
+1. CLI is not actively used by users, which makes some features hard to implement.
 
 ## Solution
 
