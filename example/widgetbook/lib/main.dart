@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:widgetbook/widgetbook.dart';
 
 void main() {
   runApp(const WidgetbookApp());
@@ -10,8 +9,7 @@ class WidgetbookApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Widgetbook.material(
-      directories: [],
-    );
+    // Entry point for the app would be here
+    return Placeholder();
   }
 }
