@@ -8,7 +8,6 @@ const metadata = ComponentMetadata(
   type: Button,
   name: 'Button 4',
   description: 'A button to click on.',
-  designUrl: 'https://www.figma.com/file/...',
   documentation: '''
   Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit.
    1. Nullam euismod, nisl eget aliquam ultricies, quam odio
@@ -19,6 +18,7 @@ const metadata = ComponentMetadata(
 
 final $DefaultButton = ButtonStory(
   name: 'Default',
+  designUrl: 'https://www.figma.com/file/...',
   args: ButtonArgs(
     // If no name or description is provided, the name of the field will be used
     // as name and the doc comment of the field will be used as description.

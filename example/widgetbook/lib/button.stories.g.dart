@@ -9,6 +9,7 @@ class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
   ButtonStory({
     required super.name,
     required super.args,
+    super.designUrl,
     super.setup,
     super.builder,
   });

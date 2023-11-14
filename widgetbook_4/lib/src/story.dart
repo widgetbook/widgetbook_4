@@ -7,12 +7,14 @@ abstract class WidgetbookStory<T, TArgs extends WidgetbookArgs<T>> {
   WidgetbookStory({
     required this.name,
     required this.args,
+    this.designUrl,
     this.setup = _defaultSetup,
     this.builder,
   });
 
   final String name;
   final TArgs args;
+  final String? designUrl;
   final Widget Function(BuildContext context, Widget child) setup;
   final Widget Function(BuildContext context, TArgs args)? builder;
 

@@ -17,14 +17,12 @@ class ComponentMetadata {
     required this.type,
     this.name,
     this.description,
-    this.designUrl,
     this.documentation,
   });
 
   final Type type;
   final String? name;
   final String? description;
-  final String? designUrl;
   final String? documentation;
 
   ComponentMetadata mergeWith(ComponentMetadata other) {
@@ -32,7 +30,6 @@ class ComponentMetadata {
       type: type,
       name: other.name ?? name,
       description: other.description ?? description,
-      designUrl: other.designUrl ?? designUrl,
       documentation: other.documentation ?? documentation,
     );
   }
