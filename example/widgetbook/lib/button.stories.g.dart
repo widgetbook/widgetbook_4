@@ -8,11 +8,13 @@ typedef ButtonScenario = WidgetbookScenario<Button>;
 class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
   ButtonStory({
     required super.name,
-    required super.args,
+    ButtonArgs? args,
     super.designUrl,
     super.setup,
     super.builder,
-  });
+  }) : super(
+          args: args ?? ButtonArgs(),
+        );
 
   ComponentMetadata get component => ComponentMetadata(
         name: '$Button',

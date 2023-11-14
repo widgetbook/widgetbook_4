@@ -44,3 +44,8 @@ final $OptionalButton = ButtonStory(
     text: StringArg('Press'),
   ),
 );
+
+final $ArgLessButton = ButtonStory(
+  name: 'Arg-less',
+  // The most minimal version of a story, without any args.
+);
