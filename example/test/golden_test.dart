@@ -41,6 +41,10 @@ void main() {
                 text: StringArg('Very LongLongLongLongLong Text'),
               ),
             ).alchemist,
+            ButtonScenario(
+              // Most minimal scenario, args are extracted from story.
+              story: $ArgLessButton,
+            ).alchemist,
             ...ButtonScenario.matrix(
               story: $DefaultButton,
               modes: [

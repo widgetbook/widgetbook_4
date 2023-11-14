@@ -8,7 +8,7 @@ class WidgetbookScenario<T> {
   const WidgetbookScenario({
     required this.story,
     this.modes,
-    required this.args,
+    this.args,
   });
 
   static List<WidgetbookScenario<T>> matrix<T>({
@@ -22,15 +22,17 @@ class WidgetbookScenario<T> {
 
   final WidgetbookStory<T, WidgetbookArgs<T>> story;
   final List<WidgetbookMode>? modes;
-  final WidgetbookArgs<T> args;
+  final WidgetbookArgs<T>? args;
 
   Widget build(BuildContext context) {
+    final effectiveArgs = args ?? story.args;
+
     return Column(
       children: [
         Text('WidgetbookScope'),
         Text('WidgetbookState'),
         Text('Building with ${modes?.length} modes}'),
-        args.build(context),
+        effectiveArgs.build(context),
       ],
     );
   }
