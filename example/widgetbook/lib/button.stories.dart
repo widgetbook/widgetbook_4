@@ -35,3 +35,12 @@ final $DefaultButton = ButtonStory(
     ),
   ),
 );
+
+final $OptionalButton = ButtonStory(
+  name: 'Optional',
+  args: ButtonArgs(
+    // Only specify the needed params, the rest will be filled with the default
+    // values from the constructor.
+    text: StringArg('Press'),
+  ),
+);

@@ -25,8 +25,16 @@ class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
 /// [Arg] instead of the constructor arguments.
 class ButtonArgs extends WidgetbookArgs<Button> {
   ButtonArgs({
-    required Arg<String> text,
-    required Arg<Color> color,
+    Arg<String> text = const StringArg(
+      '',
+      name: 'Text',
+      description: 'The text of this button.',
+    ),
+    Arg<Color> color = const ColorArg(
+      Color(0xFF000000),
+      name: 'Color',
+      description: 'The background color of this button.',
+    ),
   })  : this.text = text.mergeWith(
           name: 'Text',
           description: 'The text of this button.',

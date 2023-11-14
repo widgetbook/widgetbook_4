@@ -12,7 +12,7 @@ abstract class Arg<T> {
   final String? name;
   final String? description;
 
-  Arg(
+  const Arg(
     this.value, {
     required this.name,
     required this.description,
@@ -30,7 +30,7 @@ abstract class Arg<T> {
 // class CustomArg extends Arg {}
 
 class ColorArg extends Arg<Color> {
-  ColorArg(
+  const ColorArg(
     super.value, {
     super.name,
     super.description,
@@ -38,7 +38,7 @@ class ColorArg extends Arg<Color> {
 }
 
 class StringArg extends Arg<String> {
-  StringArg(
+  const StringArg(
     super.value, {
     super.name,
     super.description,
