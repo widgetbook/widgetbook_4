@@ -2,7 +2,7 @@ import 'arg.dart';
 import 'story.dart';
 
 // TODO: check if we need this class
-abstract class WidgetbookComponent<T> {
+class WidgetbookComponent<T> {
   const WidgetbookComponent({
     required this.metadata,
     required this.stories,

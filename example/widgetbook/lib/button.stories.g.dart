@@ -5,6 +5,15 @@ part of 'button.stories.dart';
 // Syntactic sugar
 typedef ButtonScenario = WidgetbookScenario<Button>;
 
+final ButtonComponent = WidgetbookComponent<Button>(
+  metadata: metadata,
+  stories: [
+    $DefaultButton,
+    $OptionalButton,
+    $ArgLessButton,
+  ],
+);
+
 class ButtonStory extends WidgetbookStory<Button, ButtonArgs> {
   ButtonStory({
     required super.name,
